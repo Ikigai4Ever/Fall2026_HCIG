@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talk to the Widget · Field Guide</title>
+<style>
+
+  :root{
+    --gold:#e6a938; --gold-2:#f2c15a; --ink:#ffffff; --muted:#c9b8de;
+    --card:rgba(24,10,40,.72); --line:rgba(230,169,56,.22); --pre:rgba(8,4,16,.82);
+    --purpleA:#3b1a63; --purpleB:#5a2a86;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;background-color:#160a24;background-image:radial-gradient(1200px 620px at 50% -8%, rgba(126,64,176,.38), rgba(22,10,36,0) 62%),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjAiIGhlaWdodD0iMjYwIiB2aWV3Qm94PSIwIDAgMjYwIDI2MCI+PHJlY3Qgd2lkdGg9IjI2MCIgaGVpZ2h0PSIyNjAiIGZpbGw9IiMxYzBkMmUiLz48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNlNmE5MzgiIHN0cm9rZS1vcGFjaXR5PSIwLjA2IiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0yNCAyNEgxMzBWOTBIMjM2Ii8+PHBhdGggZD0iTTQwIDIzNlYxNTBIMTUwIi8+PHBhdGggZD0iTTIzNiA0NFYxMjhIMTY4VjIxMiIvPjxwYXRoIGQ9Ik0wIDEwOEg2NFY2NCIvPjxwYXRoIGQ9Ik0xMzAgMjEwSDIyNCIvPjxwYXRoIGQ9Ik05MCAwVjU0SDE1MCIvPjwvZz48ZyBmaWxsPSIjYzk5YTNhIiBmaWxsLW9wYWNpdHk9IjAuMTAiPjxjaXJjbGUgY3g9IjEzMCIgY3k9IjkwIiByPSI0Ii8+PGNpcmNsZSBjeD0iMjM2IiBjeT0iOTAiIHI9IjQiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjE1MCIgcj0iNCIvPjxjaXJjbGUgY3g9IjE2OCIgY3k9IjEyOCIgcj0iNCIvPjxjaXJjbGUgY3g9IjY0IiBjeT0iNjQiIHI9IjQiLz48Y2lyY2xlIGN4PSIyMjQiIGN5PSIyMTAiIHI9IjQiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI1NCIgcj0iNCIvPjwvZz48L3N2Zz4K");background-repeat:no-repeat, repeat;background-size:auto, 260px 260px;background-attachment:fixed, fixed;}
+  .wrap{max-width:820px;margin:0 auto;padding:32px 20px 80px}
+  header.hero{background:linear-gradient(135deg,var(--purpleA),var(--purpleB));color:#fff;
+    border-radius:18px;padding:30px 28px;margin-bottom:28px;
+    border:1px solid rgba(230,169,56,.45);box-shadow:0 12px 34px rgba(0,0,0,.45)}
+  .kicker{text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800;color:var(--gold-2);margin:0 0 8px}
+  header.hero h1{margin:0 0 6px;font-size:32px;line-height:1.1;font-weight:800;letter-spacing:.5px}
+  header.hero p{margin:6px 0 0;color:#efe6fb}
+  h2{font-size:22px;font-weight:800;margin:34px 0 12px;padding-bottom:8px;color:#fff;border-bottom:2px solid rgba(230,169,56,.35)}
+  h3{font-size:17px;margin:0 0 6px;font-weight:700;color:#fff}
+  p{margin:10px 0} strong{color:#fff} em{color:#e8dcf6}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0;
+    box-shadow:0 6px 20px rgba(0,0,0,.28);backdrop-filter:blur(2px)}
+  .chip{display:inline-block;background:rgba(230,169,56,.16);color:var(--gold-2);border:1px solid rgba(230,169,56,.4);
+    border-radius:999px;padding:3px 11px;font-size:12px;font-weight:800;letter-spacing:.03em}
+  .chip.hw{background:rgba(126,64,176,.3);color:#e7ccff;border-color:rgba(180,130,230,.5)}
+  ul,ol{margin:10px 0;padding-left:22px} li{margin:5px 0}
+  code{background:rgba(230,169,56,.15);color:#f4d9a6;padding:1.5px 6px;border-radius:5px;
+    font-family:"Cascadia Code",ui-monospace,Consolas,Menlo,monospace;font-size:.9em}
+  pre{background:var(--pre);color:#e9dcff;padding:14px 16px;border-radius:10px;overflow-x:auto;
+    border:1px solid rgba(230,169,56,.16);
+    font-family:"Cascadia Code",ui-monospace,Consolas,Menlo,monospace;font-size:13px;line-height:1.5}
+  pre code{background:none;padding:0;color:inherit}
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid rgba(230,169,56,.16);vertical-align:top}
+  th{color:var(--gold-2);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+  .note{color:var(--muted);font-size:14px}
+  .warn{background:rgba(150,40,25,.32);color:#ffc2b0;border:1px solid rgba(255,120,90,.35);border-radius:10px;padding:12px 14px;font-size:14px;font-weight:500}
+  footer{margin-top:40px;color:var(--muted);font-size:13px;text-align:center}
+
+  .flag{background:rgba(230,169,56,.12);color:var(--gold-2);border:1px solid rgba(230,169,56,.4);border-radius:10px;
+    padding:10px 14px;font-weight:800;display:flex;gap:8px;align-items:center;margin-top:10px;
+    font-family:"Cascadia Code",ui-monospace,Consolas,Menlo,monospace;font-size:13px}
+  details{margin-top:12px;border:1px dashed rgba(230,169,56,.4);border-radius:10px;padding:2px 14px;background:rgba(10,4,20,.4)}
+  summary{cursor:pointer;font-weight:700;color:var(--gold-2);padding:10px 0}
+  details[open]{padding-bottom:12px}
+  .steps{counter-reset:s;list-style:none;padding-left:0}
+  .steps li{counter-increment:s;position:relative;padding-left:38px;margin:12px 0}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;
+    background:linear-gradient(135deg,var(--gold),#c98a24);color:#2a1206;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;box-shadow:0 0 0 1px rgba(230,169,56,.3)}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <p class="kicker">Hardware Cyber Interest Group · Intro Meeting</p>
+  <h1>Talk to the Widget</h1>
+  <p>Tonight you'll take a bare chip, load your own firmware onto it, and get it to
+  talk back. By the end you'll have flashed a real microcontroller, opened a serial
+  link to it, and tracked down the flags hidden inside.</p>
+</header>
+
+<div class="card">
+  <h3>What is this thing?</h3>
+  <p>The board in front of you is an <strong>ESP32-C3</strong>. It's a full computer
+  smaller than a stick of gum, and it's the same kind of chip you'll find inside smart
+  plugs, doorbells, and cheap toys. Hardware cyber starts when you stop treating a
+  device as a sealed box and start loading your own code onto it and reading what it
+  says back.</p>
+  <p>Three words worth knowing tonight:</p>
+  <ul>
+    <li><strong>Firmware.</strong> The program that runs on the chip. You can overwrite it, and you will.</li>
+    <li><strong>Serial.</strong> A plain-text conversation between your laptop and the board over the USB cable.</li>
+    <li><strong>Buffer.</strong> A fixed-size slot for data, and where a lot of security bugs begin.</li>
+  </ul>
+  <div class="flag" style="margin-top:12px">🚩 Flags look like this: TTU{ ... }</div>
+</div>
+
+<h2>Part 1 · Flash your firmware</h2>
+<div class="card">
+  <p>Flashing means writing a new program onto the chip. You're going to do it yourself.</p>
+  <p class="note" style="margin-top:0"><strong>Which terminal?</strong> Every command below
+  works the same in <strong>Windows PowerShell</strong> and <strong>Git Bash</strong>. Just run
+  each line on its own. The one thing that changes between them is how you put two commands on
+  one line: <code>cmd1 &amp;&amp; cmd2</code> in Git Bash, or <code>cmd1; if ($?) { cmd2 }</code>
+  in PowerShell, which doesn't accept <code>&amp;&amp;</code>. We write <code>python -m esptool</code>
+  and <code>python -m mpremote</code> because they work right after <code>pip install</code>. If you
+  type plain <code>esptool</code> and get "not recognized," that's just a PATH thing, and the
+  <code>python -m</code> form gets around it.</p>
+  <ol class="steps">
+    <li>Plug the board into your laptop with the USB-C cable.</li>
+    <li>Install the two tools (one time):
+      <pre><code>pip install esptool mpremote</code></pre></li>
+    <li>Find the board's port. On Windows, open Device Manager and look under
+      <em>Ports (COM &amp; LPT)</em> for a new <code>COM#</code>. On Mac or Linux it's a
+      <code>/dev/tty.*</code> or <code>/dev/ttyACM0</code>. The commands below say <code>COM5</code>,
+      so put in whatever yours is.</li>
+    <li>Wipe the chip, then write MicroPython, the base system your firmware runs on:
+      <pre><code>python -m esptool --port COM5 erase-flash
+python -m esptool --port COM5 write-flash -z 0x0 ESP32_GENERIC_C3-20260824-v1.29.0.bin</code></pre></li>
+    <li>Copy tonight's program onto it as <code>main.py</code>, the file the board runs at boot,
+      then reboot:
+      <pre><code>python -m mpremote connect COM5 fs cp hcig_intro.py :main.py
+python -m mpremote connect COM5 reset</code></pre></li>
+  </ol>
+  <p class="note">The firmware image and <code>hcig_intro.py</code> are in the shared folder and on the USB stick we passed around.</p>
+</div>
+
+<h2>Part 2 · Say something to it</h2>
+<div class="card">
+  <p>Now open a <strong>serial terminal</strong>. It's just a window that shows the text the
+  board sends and lets you type back.</p>
+  <ol class="steps">
+    <li>Connect at <strong>115200 baud, 8N1</strong>. Any of these work:
+      <pre><code>python -m mpremote connect COM5 repl
+# ...or open PuTTY / Tera Term / MobaXterm on COM5 at 115200</code></pre></li>
+    <li>You should see a big <code>SmartWidget 3000</code> banner and a <code>widget&gt;</code>
+      prompt. If not, press Enter, or unplug and replug the board.</li>
+    <li>Type anything. Your letters show up on screen because the board is <em>echoing</em> them
+      back. That round trip is your code running on the chip and reacting to each key.</li>
+    <li>Type <code>help</code> and press Enter to see what it knows.</li>
+  </ol>
+  <details>
+    <summary>Nothing shows up when I type?</summary>
+    <p>Check that you connected to the <em>board's</em> COM port at 115200. Press Enter once, or
+    unplug and replug the board to bring the banner back. Still nothing? Grab a facilitator.</p>
+  </details>
+</div>
+
+<h2>Part 3 · Find the flags</h2>
+<div class="card">
+  <p>The walkthrough stops here. There are four flags in the widget, and each one prints on
+  your screen when you reach it. They look like <code>TTU{ ... }</code>.</p>
+  <p>A few places to look:</p>
+  <ul>
+    <li>Run <code>help</code> and work through the commands it lists.</li>
+    <li>The board takes input from more than the keyboard. Check the hardware, not just the terminal.</li>
+    <li>Try giving it more input than it seems to expect.</li>
+    <li>One command wants a password. This unit never changed its default, and the password is
+      sitting in the firmware you flashed, wrapped in a common text encoding you can undo in seconds.</li>
+  </ul>
+  <p class="note">If you get stuck, ask a facilitator. Bring the flags you find so we can record them.</p>
+</div>
+
+<div class="warn" style="margin-top:26px">
+  <strong>Rules of engagement.</strong> Everything tonight runs on hardware we handed you and
+  asked you to break. Never point any of this at a device, network, or account you don't own or
+  have clear permission to test.
+</div>
+
+<footer>
+  Talk to the Widget · Field Guide · HCIG Intro Lab · training use only
+</footer>
+
+</div>
+</body>
+</html>
