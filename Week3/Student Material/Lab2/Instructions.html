@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PCB Analysis</title>
+<style>
+
+  :root{
+    --gold:#e6a938; --gold-2:#f2c15a; --ink:#ffffff; --muted:#c9b8de;
+    --card:rgba(24,10,40,.72); --line:rgba(230,169,56,.22); --pre:rgba(8,4,16,.82);
+    --purpleA:#3b1a63; --purpleB:#5a2a86;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;background-color:#160a24;background-image:radial-gradient(1200px 620px at 50% -8%, rgba(126,64,176,.38), rgba(22,10,36,0) 62%),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjAiIGhlaWdodD0iMjYwIiB2aWV3Qm94PSIwIDAgMjYwIDI2MCI+PHJlY3Qgd2lkdGg9IjI2MCIgaGVpZ2h0PSIyNjAiIGZpbGw9IiMxYzBkMmUiLz48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNlNmE5MzgiIHN0cm9rZS1vcGFjaXR5PSIwLjA2IiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0yNCAyNEgxMzBWOTBIMjM2Ii8+PHBhdGggZD0iTTQwIDIzNlYxNTBIMTUwIi8+PHBhdGggZD0iTTIzNiA0NFYxMjhIMTY4VjIxMiIvPjxwYXRoIGQ9Ik0wIDEwOEg2NFY2NCIvPjxwYXRoIGQ9Ik0xMzAgMjEwSDIyNCIvPjxwYXRoIGQ9Ik05MCAwVjU0SDE1MCIvPjwvZz48ZyBmaWxsPSIjYzk5YTNhIiBmaWxsLW9wYWNpdHk9IjAuMTAiPjxjaXJjbGUgY3g9IjEzMCIgY3k9IjkwIiByPSI0Ii8+PGNpcmNsZSBjeD0iMjM2IiBjeT0iOTAiIHI9IjQiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjE1MCIgcj0iNCIvPjxjaXJjbGUgY3g9IjE2OCIgY3k9IjEyOCIgcj0iNCIvPjxjaXJjbGUgY3g9IjY0IiBjeT0iNjQiIHI9IjQiLz48Y2lyY2xlIGN4PSIyMjQiIGN5PSIyMTAiIHI9IjQiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSI1NCIgcj0iNCIvPjwvZz48L3N2Zz4K");background-repeat:no-repeat, repeat;background-size:auto, 260px 260px;background-attachment:fixed, fixed;}
+  .wrap{max-width:820px;margin:0 auto;padding:32px 20px 80px}
+  header.hero{background:linear-gradient(135deg,var(--purpleA),var(--purpleB));
+    color:#fff;
+    border-radius:18px;padding:30px 28px;margin-bottom:28px;
+    border:1px solid rgba(230,169,56,.45);box-shadow:0 12px 34px rgba(0,0,0,.45)}
+  .kicker{text-transform:uppercase;
+    letter-spacing:.16em;font-size:12px;
+    font-weight:800;color:var(--gold-2);
+    margin:0 0 8px}
+  header.hero h1{margin:0 0 6px;font-size:32px;line-height:1.1;font-weight:800;letter-spacing:.5px}
+  header.hero p{margin:6px 0 0;color:#efe6fb}
+  h2{
+      font-size:22px;
+      font-weight:800;
+      margin:34px 0 12px;
+      padding-bottom:8px;
+      color:#fff;
+      border-bottom:2px solid rgba(230,169,56,.35)
+    }
+  h3{font-size:17px;margin:0 0 6px;font-weight:700;color:#fff}
+  p{margin:10px 0} strong{color:#fff} em{color:#e8dcf6}
+  .card{background:var(--card);border:1px solid var(--line);
+        border-radius:14px;padding:20px 22px;margin:16px 0;
+        box-shadow:0 6px 20px rgba(0,0,0,.28);
+        backdrop-filter:blur(2px)}
+  .chip{display:inline-block;background:rgba(230,169,56,.16);
+        color:var(--gold-2);border:1px solid rgba(230,169,56,.4);
+        border-radius:999px;
+        padding:3px 11px;
+        font-size:12px;
+        font-weight:800;
+        letter-spacing:.03em
+      }
+  .chip.hw{background:rgba(126,64,176,.3);
+           color:#e7ccff;
+           border-color:rgba(180,130,230,.5)
+          }
+  ul,ol{margin:10px 0;
+        padding-left:22px} li{margin:5px 0}
+  code{background:rgba(230,169,56,.15);
+       color:#f4d9a6;padding:1.5px 6px;
+       border-radius:5px;
+       font-family:"Cascadia Code",ui-monospace,Consolas,Menlo,monospace;
+       font-size:.9em
+      }
+  pre{background:var(--pre);
+      color:#e9dcff;
+      padding:14px 16px;
+      border-radius:10px;
+      overflow-x:auto;
+      border:1px solid rgba(230,169,56,.16);
+      font-family:"Cascadia Code",ui-monospace,Consolas,Menlo,monospace;
+      font-size:13px;
+      line-height:1.5
+    }
+  pre code{background:none;
+           padding:0;
+           color:inherit
+          }
+  table{border-collapse:collapse;width:100%;
+        margin:12px 0;
+        font-size:14px
+       }
+  th,td{text-align:left;padding:9px 12px;
+        border-bottom:1px solid rgba(230,169,56,.16);
+        vertical-align:top
+       }
+  th{ 
+      color:var(--gold-2);
+      font-weight:700;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.05em
+    }
+  .note{
+        color:var(--muted);
+        font-size:14px
+      }
+  .warn{background:rgba(150,40,25,.32);
+        color:#ffc2b0;border:1px solid rgba(255,120,90,.35);
+        border-radius:10px;
+        padding:12px 14px;
+        font-size:14px;
+        font-weight:500
+      }
+  footer{margin-top:40px;
+         color:var(--muted);
+         font-size:13px;
+         text-align:center
+        }
+
+  .flag{background:rgba(230,169,56,.12);
+        color:var(--gold-2);
+        border:1px solid rgba(230,169,56,.4);
+        border-radius:10px;
+        padding:10px 14px;
+        font-weight:800;
+        display:flex;
+        gap:8px;
+        align-items:center;
+        margin-top:10px;
+        font-family:"Cascadia Code",ui-monospace,Consolas,Menlo,monospace;font-size:13px
+      }
+  details{margin-top:12px;
+          border:1px dashed rgba(230,169,56,.4);
+          border-radius:10px;padding:2px 14px;
+          background:rgba(10,4,20,.4)
+        }
+  summary{cursor:pointer;
+          font-weight:700;
+          color:var(--gold-2);
+          padding:10px 0
+        }
+  details[open]{padding-bottom:12px}
+  .steps{counter-reset:s;
+         list-style:none;
+         padding-left:0
+        }
+  .steps li{counter-increment:s;
+            position:relative;
+            padding-left:38px;
+            margin:12px 0
+          }
+  .steps li::before{content:counter(s);
+                    position:absolute;
+                    left:0;top:0;
+                    width:26px;
+                    height:26px;
+                    border-radius:50%;
+                    background:linear-gradient(135deg,var(--gold),#c98a24);
+                    color:#2a1206;display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:13px;
+                    font-weight:800;
+                    box-shadow:0 0 0 1px rgba(230,169,56,.3)
+                  }
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <p class="kicker">Hardware Cyber Interest Group · Electrical Concepts for Hardware Attacks </p>
+  <h1>PCB Analysis</h1>
+  <p>In this lab, you will go through some of the processes of analyzing different common parts of a development board that are open to potential hardware attacks.</p>
+</header>
+
+<div class="card">
+  <h3>Reverse Engineering a PCB</h3>
+  <p>In order to analyse a PCB, you need to know how to follow a trace from the component to the chip in order to learn how it will communicate. 
+     When using a chip in PCB design, you will only have the pin numbers along with the software that you can use to program the MCU. Engineers do not 
+     typically have a development board that is the same for all devices, so learning how to correlate a chip to a PCB and what that looks like on a schematic
+     is crucial to hardware attacks.
+  </p>
+  <p>Three words worth knowing tonight:</p>
+  <ul>
+    <li><strong>Pad.</strong> Exposed copper rectangles (typically) that is exposed for componenets to be soldered on to.</li>
+    <li><strong>Trace.</strong> Copper that connects two or more copper pads under neath the coating.</li>
+    <li><strong>Via.</strong> A copper circle cutout that connects different layers of a PCB together.</li>
+    <li><strong>Chip.</strong> Any IC or MCU device (normally a black square/rectangle) on a PCB.</li>
+  </ul>
+  <div class="flag" style="margin-top:12px">🚩 The flag for the lab will be a composition of mutliple answers from the lab tonight.</div>
+</div>
+
+<h2>Analysis 1 · USB Interface</h2>
+<div class="card">
+  <p>For this first part of the lab, you will need to determine the pins that allow for UART communication from your laptop to the MCU on the board</p>
+  <p class="note" style="margin-top:0"></p>
+  <ol class="steps">
+    <li>Determine the pin number of the Data Minus (D-) from the USB to the MSP432E401 chip</li>
+    <li>Determine the number of vias that the D- trace goes through before connecting with the MSP432E401 chip</li>
+    <li>Determine the pin number of the Data Plus (D+) from the USB to the MSP432E401 chip</li>
+    <li>Determine the number of vias that the D+ trace goes through before connecting with the MSP432E401 chip</li>
+    <li>You the will create the final flag for the USB Interface in hexadecimal as followed:
+      <pre><code>hcig{DataPlusPin_DataPlusVias_DataMinusPin_DataMinusVias}</code></pre></li>
+  </ol>
+  <p class="note">If you are confused, please let a mentor or us know.</p>
+</div>
+
+<h2>Analysis 2 · User Buttons</h2>
+<div class="card">
+  <p>For this second part of the lab, pins that the the buttons are connected to on the board.</p>
+  <p class="note" style="margin-top:0"></p>
+  <ol class="steps">
+    <li>Determine the pin that the RST pin is connected to.</li>
+    <li>Determine the pin that the S1 or User Button 1 is connected to.</li>
+    <li>Determine the pin that the S2 or User Button 2 is connected to.</li>
+    <li>Determine what the vias are connected to on one side of the vias.</li>
+    <li>You the will create the final flag for the all of the buttons will be in hexadecimal as followed:
+      <pre><code>hcig{RSTPin_UserButton1_UserButton2_ViaConnection}</code></pre></li>
+  </ol>
+  <p class="note">If you are confused, please let a mentor or us know.</p>
+</div>
+
+<h2>Analysis 3 · LED Diagnosis</h2>
+<div class="card">
+  <p>For this third and final part of this lab, you will need to know a little about LEDs. LEDs are very sensitive
+     to current, which if a <strong> resistor</strong> is not put in series with it, the LED will more
+     than likely explode...
+  </p>
+  <p>
+    Knowing that now, you will need that information for this part of the lab. You will need to know the number of
+    resistors and LEDs in order to get the last flag. 
+  </p>
+  <ol class="steps">
+    <li>Determine the number of LEDs that there are on the PCB</li>
+    <li>Determine the number of resistors that are connected to the LEDs</li>
+    <li>Total all of the resistor values.</li>
+    <li>You the will create the final flag for all of the above should be in hexadecimal as followed:
+      <pre><code>hcig{LEDCount_ResistorCount_ResistorTotal}</code></pre></li>
+  </ol>
+  <p class="note">If you get stuck, ask a facilitator. Bring the flags you find so we can record them.</p>
+</div>
+
+<div class="warn" style="margin-top:26px">
+  <strong>Rules of engagement.</strong> Everything in this lab can be done! I understand that it 
+  is not the easier thing or the most familiar, but we can help you because this topic is just a 
+  skill you gain over time. Feel free to ask questions!
+</div>
+
+<footer>
+  PCB Analysis · Field Guide · HCIG Electrical Concepts for Hardware Attacks
+</footer>
+
+</div>
+</body>
+</html>
